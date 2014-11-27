@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">document.registerElement('x-pie');</script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<style type="text/css" media="all">
+        html,body{height:100%;padding:0px;border:0px;margin:0px;font-family: 'Raleway', sans-serif;}
+        .container{width:900px;margin:0px auto;}
+        x-pie{display:block;width:500px;height:270px;display:block;margin:80px auto;text-align:left;}
+        svg{overflow:visible;}
+        svg .wedge{cursor:pointer;}
+        svg .wedge:hover{opacity:0.5;}
+        x-pie h1{font-size:1.5em;}
+
+        .example {width:100%;margin-top:50px;text-align:center;}
+
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        <div class="example">
+            <x-pie chart="{'data': [12, 23, 34, 20],'colours': ['#113F8C', '#61AE24', '#D0D102', '#E54028'],'labels': ['Not Started', 'Started', 'Never going to finish', 'Completed'], 'title':'To Do List', 'tilt':true}"></x-pie>
+            <x-pie chart="{'data': [45, 8, 34, 66,88],'colours': ['red', 'blue', 'yellow', 'green','#E0e0e0'],'labels': ['Marlo', 'Bodie', 'Omar', 'Stringer','Avon'],'title':'The Wire','doughnut':true}"></x-pie>
+        </div>  
+    </div>
+    <script type="text/javascript" src="piechart.js"></script>
+    
+</body>
+</html>

@@ -14,7 +14,7 @@
 
 $(document).ready(function () {
     // Find all x-pie elements and loop through
-    $('x-pie').each(function () {
+    $('x-pie').each(function (index) {
         // read the data
         var pc = $(this).attr('chart');
         // parse
@@ -23,13 +23,13 @@ $(document).ready(function () {
         // create title
         var title = pc.title;
         // create chart: pass in the container and the data. Size of the pie is based off the the size of the container.
-        pc = pieChart(this, pc);
+        pc = pieChart(this, pc,index);
         $(this).append($("<h1 class='pie'>" + title + "</h1>"));
         $(this).append(pc);
     });
     
 })
-function pieChart(el,cd) {
+function pieChart(el,cd,index) {
     
     var data = cd.data;
     var doughnut = (cd.doughnut)? cd.doughnut : false;
@@ -112,9 +112,17 @@ function pieChart(el,cd) {
         path.setAttribute("stroke", "white");   // Outline wedge in black
         path.setAttribute("stroke-width", "1"); // 2 units thick   
         path.setAttribute("class", "wedge");
-        path.setAttribute("id", "wedge_" + i);
-        $(path).on("mouseover", function () { console.log('in');console.log($(this).attr("id")) });
-        $(path).on("mouseout", function () { console.log('out'); console.log($(this).attr("id")) });
+        path.setAttribute("label", "label_" +index +"_"+ i);
+        $(path).on("mouseover", function () {
+            var label = $("#" + $(this).attr("label"));
+            label.attr('font-weight','bold');
+            console.log(label);
+        });
+        $(path).on("mouseout", function () {
+            var label = $("#" + $(this).attr("label"));
+            label.attr('font-weight','normal');
+            console.log(label);
+        });
         chart.appendChild(path);                // Add wedge to chart
 
         // The next wedge begins where this one ends
@@ -141,6 +149,7 @@ function pieChart(el,cd) {
         // Text style attributes could also be set via CSS
         label.setAttribute("font-family", "inherit");
         label.setAttribute("font-size", "16");
+        label.setAttribute('id', "label_" + index + "_" + i);
         // Add a DOM text node to the <svg:text> element
         label.appendChild(document.createTextNode(labels[i]));
         chart.appendChild(label);               // Add text to the chart
@@ -159,6 +168,7 @@ function pieChart(el,cd) {
 
         //<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
         var line = document.createElementNS(svgns, "line");
+        
         line.setAttribute("x1", line_start_x);
         line.setAttribute("y1", line_start_y);
         line.setAttribute("x2", line_end_x);
